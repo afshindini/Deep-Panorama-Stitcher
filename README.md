@@ -40,7 +40,7 @@ panaroma_stitcher -vv -d ./test_data/boat opencv-simple --stitcher_type panorama
 ```
 This method is recommended than other methods as it is fast, and it can stitch multi high resolution images properly. As an example:
 <p align="center">
-    <img width="1000" src="./results/boat_simple_stitcher.png" alt="Simple Stitcher">
+    <img width="1000" src="./results/boat_simple_stitcher.jpg" alt="Simple Stitcher">
 </p>
 
 ### Detailed Stitching/Opencv Stitcher

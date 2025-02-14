@@ -5,7 +5,6 @@ from typing import Any
 from pathlib import Path
 import gradio as gr
 
-from panaroma_stitcher import __version__
 from panaroma_stitcher.kornia import KorniaStitcher
 from panaroma_stitcher.opencv_simple import SimpleStitcher
 from panaroma_stitcher.keypoint_stitcher import KeypointStitcher
@@ -21,7 +20,9 @@ class StitcherDemo:
 
     def callback(self, files: Any) -> Any:
         """Callback function to be used within gradio"""
+        print(files)
         input_dir = str(Path(files[0]).parent)
+        print(input_dir)
         if self.model_type == "Simple Stitcher":
             stitcher = SimpleStitcher(
                 image_dir=Path(input_dir), stitcher_type="panorama"
