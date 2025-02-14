@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "panaroma_stitcher"
+version = "0.1.0"
+description = "This rep can stitch multi panaroma images"
+authors = ["Afshin Dini <Afshin Dini>"]
+readme = "README.md"
+packages = [{include = "panaroma_stitcher", from = "src"}]
+
+[tool.poetry.scripts]
+panaroma_stitcher = "panaroma_stitcher.main:panaroma_stitcher_cli"
+
+[tool.pylint.format]
+max-line-length=150     # This defines the maximum number of characters on a single line in pylint
+
+[tool.pylint.design]
+max-attributes=10
+max-positional-arguments=6
+max-args=6
+
+[tool.pylint.typecheck]
+generated-members = "cv2.*"
+ignored-checks-for-mixins = ["no-member"]
+
+[tool.pylint.messages_control]
+disable=["fixme", "duplicate-code"]
+
+[tool.pylint.similarities]
+min-similarity-lines = 8    # Minimum lines number of a similarity.
+ignore-imports = true       # Ignore imports when computing similarities.
+
+[tool.bandit.assert_used]
+skips = ["B101"]
+
+[tool.pytest.ini_options]
+junit_family="xunit2"
+addopts="--cov=panaroma_stitcher --cov-fail-under=60 --cov-branch"
+
+[tool.coverage.run]
+omit = ["tests/*"]
+branch = true
+
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+click = "^8.1.7"
+kornia = "^0.7.4"
+opencv-python = "^4.10.0.84"
+matplotlib = "^3.9.2"
+llvmlite = "0.43.0"
+numba = "0.60.0"
+stitching = "^0.6.1"
+imutils = "^0.5.4"
+largestinteriorrectangle = "^0.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+coverage = "^7.6"
+pytest-cov = "^6.0"
+pylint = "^3.3.1"
+black = "^24.10.0"
+mypy = "^1.13.0"
+bump2version = "^1.0.1"
+bandit = "^1.7.10"
+pre-commit = "^4.0.1"
+detect-secrets = "^1.5"
+
+[build-system]
+requires = ["poetry-core>=1.5.0"]
+build-backend = "poetry.core.masonry.api"
