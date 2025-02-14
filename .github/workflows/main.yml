@@ -1,24 +1,3 @@
-name: Sync to Hugging Face hub
-on:
-  push:
-    branches: [master]
-
-  # to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-jobs:
-  sync-to-hub:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          lfs: true
-      - name: Add remote 
-        env:
-          HF: ${{ secrets.HG }}
-        run: git remote add space https://afshin-dini:$HF@huggingface.co/spaces/afshin-dini/deep-panorama-stitcher
-      - name: Push to hub
-        env:
-          HF: ${{ secrets.HG }}
-        run: git push --force https://afshin-dini:$HF@huggingface.co/spaces/afshin-dini/deep-panorama-stitcher master:main
+version https://git-lfs.github.com/spec/v1
+oid sha256:c62832094c8838da78f3ab7d9af9c7c5ff35cf7b370b556cb4f7fddae498254f
+size 676
