@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "panaroma_stitcher"
-version = "0.1.0"
+version = "0.2.0"
 description = "This rep can stitch multi panaroma images"
 authors = ["Afshin Dini <Afshin Dini>"]
 readme = "README.md"
