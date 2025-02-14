@@ -54,7 +54,7 @@ panaroma_stitcher -vv -d ./test_data/newspaper detailed-stitcher --detect_method
 ```
 As an example of:
 <p align="center">
-    <img width="1000" src="./results/map_detailed_stitcher.png" alt="Detailed Stitcher">
+    <img width="1000" src="./results/map_detailed_stitcher.jpg" alt="Detailed Stitcher">
 </p>
 
 
@@ -96,7 +96,7 @@ panaroma_stitcher -vv -d ./test_data/mountain sequential-stitcher --matching_met
 ```
 As an example:
 <p align="center">
-    <img width="1000" src="./results/river_sequential_stitcher.png" alt="Kornia Stitcher">
+    <img width="1000" src="./results/river_sequential_stitcher.jpg" alt="Kornia Stitcher">
 </p>
 
 ### Keypoint Stitcher
