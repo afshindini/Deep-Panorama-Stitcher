@@ -51,6 +51,7 @@ numba = "0.60.0"
 stitching = "^0.6.1"
 imutils = "^0.5.4"
 largestinteriorrectangle = "^0.2.1"
+gradio = "^5.16.0"
 
 
 [tool.poetry.group.dev.dependencies]
