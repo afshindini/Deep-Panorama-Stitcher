@@ -1,5 +1,5 @@
 ---
-title: Test
+title: Deep Panaroma Stitcher
 emoji: 😻
 colorFrom: gray
 colorTo: green
