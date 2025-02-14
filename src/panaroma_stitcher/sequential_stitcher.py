@@ -1,7 +1,7 @@
 """This stitches sequnces of images by finding homography transform between pairs of images"""
 
 from dataclasses import dataclass, field
-from typing import Any, Tuple
+from typing import Any, Tuple, Optional
 
 import logging
 import cv2
@@ -86,14 +86,14 @@ class SequentialStitcher(ImageLoader):
             img, homography, (self.final_size[1], self.final_size[0])
         )
 
-    def stitcher(self, result_path: str, framer: bool) -> None:
+    def stitcher(self, result_path: str, framer: bool) -> Optional[Any]:
         """Stitch all the images together two by two"""
         if len(self.images) == 0:
             logger.warning("No images to stitch.")
-            return
+            return None
         if len(self.images) == 1:
             logger.warning("The directory contains only one image.")
-            return
+            return None
         first_homography = np.array([[1.0, 0.0, 0], [0.0, 1.0, 0], [0.0, 0.0, 1.0]])
         result_prev = self._apply_transform(self.images[0], first_homography)
         for idx in range(1, len(self.images)):
@@ -108,3 +108,4 @@ class SequentialStitcher(ImageLoader):
         self.save_result(
             cv2.cvtColor(result_prev, cv2.COLOR_BGR2RGB), result_path, framer
         )
+        return cv2.cvtColor(result_prev, cv2.COLOR_BGR2RGB)

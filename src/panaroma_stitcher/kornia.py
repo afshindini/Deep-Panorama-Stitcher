@@ -52,7 +52,7 @@ class KorniaStitcher(ImageLoader):
             krnfeat.DescriptorMatcher(match_mode, thr),
         )
 
-    def stitcher(self, result_path: str) -> None:
+    def stitcher(self, result_path: str) -> Any:
         """Stitch images with feature matcher"""
         if not self.matcher:
             raise ValueError("Kornia matcher is not defined. Use one of loftr_matcher")
@@ -60,3 +60,4 @@ class KorniaStitcher(ImageLoader):
         with torch.no_grad():
             result = image_stitcher(*self.images)
         self.save_result(krn.tensor_to_image(result), result_path, False)  # type: ignore
+        return krn.tensor_to_image(result)  # type: ignore[attr-defined]
