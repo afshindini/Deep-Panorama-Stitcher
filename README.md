@@ -1,3 +1,13 @@
+---
+title: Test
+emoji: 😻
+colorFrom: gray
+colorTo: green
+sdk: gradio
+sdk_version: 5.16.0
+app_file: app.py
+pinned: false
+---
 # Panorama Stitcher
 This rep can stitch multi panorama images. It contains several deep and image-based analysis to do so.
 
