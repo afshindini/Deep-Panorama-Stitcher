@@ -38,7 +38,7 @@ class SimpleStitcher(ImageLoader):
             status_number
         ).name  # type: ignore
 
-    def stitcher(self, result_path: str, framer: bool) -> Optional[Any]:
+    def stitcher(self, result_path: str = "", framer: bool = True) -> Optional[Any]:
         """Stitch images with feature matcher"""
         if self.stitcher_type == "panorama":
             image_stitcher = cv2.Stitcher.create(cv2.Stitcher_PANORAMA)
@@ -53,10 +53,13 @@ class SimpleStitcher(ImageLoader):
         stitch_status, stitched_image = image_stitcher.stitch(self.images)
         if stitch_status == 0:
             logger.info("Stitching images was successful.")
-            self.save_result(
-                cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB), result_path, framer
+            if result_path != "":
+                self.save_result(
+                    cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB), result_path, framer
+                )
+            return self.remove_black_areas(
+                cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB)
             )
-            return cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB)
 
         logger.warning(
             "Stitching images FAILED with status: %s",

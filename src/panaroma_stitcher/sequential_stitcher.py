@@ -86,7 +86,7 @@ class SequentialStitcher(ImageLoader):
             img, homography, (self.final_size[1], self.final_size[0])
         )
 
-    def stitcher(self, result_path: str, framer: bool) -> Optional[Any]:
+    def stitcher(self, result_path: str = "", framer: bool = True) -> Optional[Any]:
         """Stitch all the images together two by two"""
         if len(self.images) == 0:
             logger.warning("No images to stitch.")
@@ -105,7 +105,8 @@ class SequentialStitcher(ImageLoader):
                 temp_homography = np.linalg.multi_dot([temp_homography, homography])
                 temp_result = self._apply_transform(self.images[idx], temp_homography)
             result_prev = self.stitch_cleaner(temp_result, result_prev)
-        self.save_result(
-            cv2.cvtColor(result_prev, cv2.COLOR_BGR2RGB), result_path, framer
-        )
-        return cv2.cvtColor(result_prev, cv2.COLOR_BGR2RGB)
+        if result_path != "":
+            self.save_result(
+                cv2.cvtColor(result_prev, cv2.COLOR_BGR2RGB), result_path, framer
+            )
+        return self.remove_black_areas(cv2.cvtColor(result_prev, cv2.COLOR_BGR2RGB))
