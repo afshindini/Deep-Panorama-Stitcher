@@ -3,6 +3,9 @@
 from dataclasses import dataclass, field
 from typing import Any
 from pathlib import Path
+
+import shutil
+import tempfile
 import gradio as gr
 
 from src.panaroma_stitcher.kornia import KorniaStitcher
@@ -18,16 +21,29 @@ class StitcherDemo:
 
     model_type: Any = field(init=False)
 
+    def temp_dir(self, files: Any) -> str:
+        """create temp folder for uploading the images in gradio"""
+        temp_dir = Path(tempfile.gettempdir()) / "uploaded_images"
+        if temp_dir.exists():
+            shutil.rmtree(temp_dir)
+        temp_dir.mkdir(parents=True, exist_ok=True)
+
+        for file in files:
+            file_name = Path(file).name
+            dest_path = temp_dir / file_name
+            shutil.move(file, str(dest_path))
+        return str(temp_dir)
+
     def callback(self, files: Any) -> Any:
         """Callback function to be used within gradio"""
         print(files)
-        input_dir = str(Path(files[0]).parent)
-        print(input_dir)
+        print(self.model_type)
+        input_dir = self.temp_dir(files)
         if self.model_type == "Simple Stitcher":
             stitcher1 = SimpleStitcher(
                 image_dir=Path(input_dir), stitcher_type="panorama"
             )
-            return stitcher1.stitcher("tmp/", True)
+            return stitcher1.stitcher()
         if self.model_type == "Detailed Stitcher":
             stitcher2 = DetailedStitcher(
                 image_dir=Path(input_dir),
@@ -39,11 +55,11 @@ class StitcherDemo:
                 camera_adjustor="ray",
                 camera_estimator="homography",
             )
-            return stitcher2.stitcher("tmp/", True)
+            return stitcher2.stitcher()
         if self.model_type == "Kornia Stitcher":
             stitcher3 = KorniaStitcher(image_dir=Path(input_dir))
             stitcher3.loftr_matcher(model="outdoor")
-            return stitcher3.stitcher("tmp/")
+            return stitcher3.stitcher()
         if self.model_type == "Sequential Stitcher":
             stitcher4 = SequentialStitcher(
                 image_dir=Path(input_dir),
@@ -52,7 +68,7 @@ class StitcherDemo:
                 number_feature=500,
                 final_size=(1000, 3000),
             )
-            return stitcher4.stitcher("tmp/", True)
+            return stitcher4.stitcher()
 
         stitcher5 = KeypointStitcher(
             image_dir=Path(input_dir),
@@ -60,7 +76,7 @@ class StitcherDemo:
             matcher_type="bf",
             number_feature=500,
         )
-        return stitcher5.stitcher("tmp/", True)
+        return stitcher5.stitcher()
 
     def demo(self) -> None:
         """This is a design for the demo page"""
