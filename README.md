@@ -1,3 +1,13 @@
+---
+title: Deep Panaroma Stitcher
+emoji: 😻
+colorFrom: gray
+colorTo: green
+sdk: gradio
+sdk_version: 5.16.0
+app_file: app.py
+pinned: false
+---
 # Panorama Stitcher
 This rep can stitch multi panorama images. It contains several deep and image-based analysis to do so.
 
@@ -30,7 +40,7 @@ panaroma_stitcher -vv -d ./test_data/boat opencv-simple --stitcher_type panorama
 ```
 This method is recommended than other methods as it is fast, and it can stitch multi high resolution images properly. As an example:
 <p align="center">
-    <img width="1000" src="./results/boat_simple_stitcher.png" alt="Simple Stitcher">
+    <img width="1000" src="./results/boat_simple_stitcher.jpg" alt="Simple Stitcher">
 </p>
 
 ### Detailed Stitching/Opencv Stitcher
@@ -159,3 +169,5 @@ docker run -it --rm -v "$(pwd):/app" -v /tmp:/tmp $(echo $DOCKER_SSHAGENT) panar
 ```
 
 ## Hugging Face
+The repository is also deployed in [hugging face](https://huggingface.co/spaces/afshin-dini/deep-panorama-stitcher) in which one can upload images, select the
+appropriate method and its parameters and do the stitching online.

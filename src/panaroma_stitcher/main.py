@@ -119,7 +119,7 @@ def kornia(
         stitcher.keynote_matcher(
             number_of_features=features, match_mode=matcher, thr=thr
         )
-    stitcher.stitcher(ctx.obj["result_path"])
+    _ = stitcher.stitcher(ctx.obj["result_path"])
 
 
 @panaroma_stitcher_cli.command()
@@ -137,7 +137,7 @@ def opencv_simple(ctx: Any, stitcher_type: str) -> None:
         resize_shape=ctx.obj["resize_shape"],
         stitcher_type=stitcher_type,
     )
-    stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
+    _ = stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
 
 
 @panaroma_stitcher_cli.command()
@@ -171,7 +171,7 @@ def keypoint_stitcher(
         matcher_type=matching_method,
         number_feature=number_feature,
     )
-    stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
+    _ = stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
 
 
 @panaroma_stitcher_cli.command()
@@ -232,7 +232,7 @@ def detailed_stitcher(  # pylint: disable=R0913, R0917
         camera_adjustor=cam_adj,
         camera_estimator=cam_est,
     )
-    stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
+    _ = stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
 
 
 @panaroma_stitcher_cli.command()
@@ -272,4 +272,4 @@ def sequential_stitcher(
         number_feature=number_feature,
         final_size=final_shape,
     )
-    stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])
+    _ = stitcher.stitcher(ctx.obj["result_path"], ctx.obj["cleaner"])

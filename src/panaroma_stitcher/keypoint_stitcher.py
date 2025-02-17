@@ -110,18 +110,20 @@ class KeypointStitcher(ImageLoader):
             return result_image
         return result_image[crds[1] : crds[1] + crds[3], crds[0] : crds[0] + crds[2]]
 
-    def stitcher(self, result_path: str, framer: bool) -> None:
+    def stitcher(self, result_path: str = "", framer: bool = True) -> Optional[Any]:
         """Stitch all the images together"""
         if len(self.images) == 0:
             logger.warning("No images to stitch.")
-            return
+            return None
         if len(self.images) == 1:
             logger.warning("The directory contains only one image.")
-            return
+            return None
         stitched_image = self._stitcher_helper(self.images[1], self.images[0])
         for idx in range(2, len(self.images)):
             temp = self._stitcher_helper(self.images[idx], stitched_image)
             stitched_image = temp
-        self.save_result(
-            cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB), result_path, framer
-        )
+        if result_path != "":
+            self.save_result(
+                cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB), result_path, framer
+            )
+        return self.remove_black_areas(cv2.cvtColor(stitched_image, cv2.COLOR_BGR2RGB))
