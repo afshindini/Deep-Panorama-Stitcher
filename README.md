@@ -169,3 +169,5 @@ docker run -it --rm -v "$(pwd):/app" -v /tmp:/tmp $(echo $DOCKER_SSHAGENT) panar
 ```
 
 ## Hugging Face
+The repository is also deployed in [hugging face](https://huggingface.co/spaces/afshin-dini/deep-panorama-stitcher) in which one can upload images, select the
+appropriate method and its parameters and do the stitching online.
