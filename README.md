@@ -1,6 +1,6 @@
 ---
 title: Deep Panaroma Stitcher
-emoji: 😻
+emoji: 🏞️↔️🏞️
 colorFrom: gray
 colorTo: green
 sdk: gradio
